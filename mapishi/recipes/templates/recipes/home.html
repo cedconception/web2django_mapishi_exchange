@@ -1,0 +1,63 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Mapishi Recipes{% endblock %}
+
+{%block content%}
+
+<header class="container-fluid bg-success py-3">
+    <div class="container">
+        <h1 class="text-white display-4">Mapishi Exchange</h1>
+        <p class="text-white lead">Share your favorite recipes and discover new ones!</p>
+    </div>
+</header>
+{% include 'header.html' %}
+
+<div class="container-fluid " style="background-image: url('../../static/img/9bc62940-e326-11ec-92b2-962b9dd69cc7_better_chinese_food.avif'); height: 300px; ">
+    <div class="d-flex justify-content-center h-100">
+      <div class="text-center text-white align-self-center">
+        <h1 class="display-3 fw-bold">Share Your Recipes</h1>
+        <p class="lead mb-4">Join our community and discover new dishes from around the world.</p>
+        <a class="btn btn-primary btn-lg" href="#">Start Exchanging</a>
+      </div>
+    </div>
+  </div>
+
+<main class="container my-5">
+
+    <section class="mb-5">
+        <h2 class="mb-3">Featured Recipes</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'img/Congo-Moambe-Chicken-13.jpg' %}" class="card-img-top" alt="Recipe Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Recipe Title</h5>
+                        <p class="card-text">Short recipe description.</p>
+                        <a href="#" class="btn btn-primary">View Recipe</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </section>
+
+    <div class="text-center mb-5">
+        <a href="" class="btn btn-lg btn-success">Share Your Recipe</a>
+    </div>
+
+    <section class="mb-5">
+        <h2>Browse by Category</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#">Breakfast</a></li>
+            <li class="list-group-item"><a href="#">Lunch</a></li>
+            <li class="list-group-item"><a href="#">Dinner</a></li>
+            <li class="list-group-item"><a href="#">Desserts</a></li>
+        </ul>
+    </section>
+</main>
+
+<footer class="container-fluid bg-dark text-white py-3">
+    <p class="text-center">Copyright &copy; 2024 Mapishi Exchange</p>
+</footer>
+{%endblock%}

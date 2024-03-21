@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Mapishi Recipe - { recipe.title }{% endblock %}
+
+{% block content %}
+
+<header class="container-fluid bg-success py-3">
+  <div class="container">
+    <h1 class="text-white display-4">Mapishi Recipes</h1>
+    <p class="text-white lead">Explore delicious dishes!</p>
+  </div>
+</header>
+{% include 'header.html' %}
+
+<main class="container my-5">
+
+  <section class="mb-5">
+    <div class="row">
+      <div class="col-md-8">
+        <img src="" class="img-fluid mb-3" alt="{{ recipe.title }}">
+        <h2>recipe.title</h2>
+        <p class="lead">by recipe author </p>
+        <div class="mb-3">
+          <span class="badge bg-primary">recipe category</span>
+          <span class="badge bg-warning">Prep Time: recipe.prep_time</span>
+          <span class="badge bg-success">Cook Time: recipe.cook_time</span>
+          <span class="badge bg-info">Serves: recipe.servings</span>
+        </div>
+        <div class="mb-3">
+          <h3>Ingredients</h3>
+          <ul>
+            {% for ingredient in recipe.ingredients %}
+              <li>ingredient</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <h3>Instructions</h3>
+        <ol>
+          {% for instruction in recipe.instructions %}
+            <li>{{ instruction }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+      <div class="col-md-4">
+        <h3>Share this Recipe</h3>
+        <div class="d-flex justify-content-between mb-3">
+          <a href="#" class="btn btn-primary">Print Recipe</a>
+          <a href="#" class="btn btn-outline-primary">Save Recipe</a>
+        </div>
+        <h3>Leave a Comment</h3>
+        <form>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Your Comment</label>
+            <textarea class="form-control" id="comment" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Comment</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container-fluid bg-dark text-white py-3">
+  <p class="text-center">Copyright &copy; 2024 Mapishi Exchange</p>
+</footer>
+{% endblock %}
