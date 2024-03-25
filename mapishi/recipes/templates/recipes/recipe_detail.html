@@ -17,34 +17,33 @@
   <section class="mb-5">
     <div class="row">
       <div class="col-md-8">
-        <img src="" class="img-fluid mb-3" alt="{{ recipe.title }}">
-        <h2>recipe.title</h2>
+        <h2>{{recipe.title}}</h2> 
+        {% if recipe.image%}
+        <img src="{{recipe.image.url}}" class="card-img-top" alt="Recipe Image">
+        {%else%}
+        <img src="{% static 'img/Congo-Moambe-Chicken-13.jpg' %}" class="card-img-top rounded" alt="Recipe Image">
+        {%endif%}
+
         <p class="lead">by recipe author </p>
         <div class="mb-3">
           <span class="badge bg-primary">recipe category</span>
           <span class="badge bg-warning">Prep Time: recipe.prep_time</span>
           <span class="badge bg-success">Cook Time: recipe.cook_time</span>
-          <span class="badge bg-info">Serves: recipe.servings</span>
         </div>
         <div class="mb-3">
           <h3>Ingredients</h3>
-          <ul>
-            {% for ingredient in recipe.ingredients %}
-              <li>ingredient</li>
-            {% endfor %}
-          </ul>
+          <p>{{recipe.ingredients}}</p>
         </div>
         <h3>Instructions</h3>
         <ol>
-          {% for instruction in recipe.instructions %}
-            <li>{{ instruction }}</li>
-          {% endfor %}
+          <p>{{recipe.instructions}}</p>
+          
         </ol>
       </div>
       <div class="col-md-4">
         <h3>Share this Recipe</h3>
         <div class="d-flex justify-content-between mb-3">
-          <a href="#" class="btn btn-primary">Print Recipe</a>
+          <a href="#" class="btn btn-primary" onclick="window.print()">Print Recipe</a>
           <a href="#" class="btn btn-outline-primary">Save Recipe</a>
         </div>
         <h3>Leave a Comment</h3>

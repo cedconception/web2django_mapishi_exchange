@@ -26,20 +26,27 @@
 
 <main class="container my-5">
 
-    <section class="mb-5">
-        <h2 class="mb-3">Featured Recipes</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+    <h2 class="mb-3">Featured Recipes</h2>
+    <section class="mb-5 d-flex flex-wrap " >
+        {% for recipe in recipes %}
+        <div class="col-md-3 mb-3 p-2">
             <div class="col">
-                <div class="card">
+                <div class="card mb-3">
+                {% if recipe.image%}
+                    <img src="{{recipe.image.url}}" class="card-img-top" alt="Recipe Image">
+                {%else%}
                     <img src="{% static 'img/Congo-Moambe-Chicken-13.jpg' %}" class="card-img-top" alt="Recipe Image">
+                {%endif%}
+
                     <div class="card-body">
-                        <h5 class="card-title">Recipe Title</h5>
-                        <p class="card-text">Short recipe description.</p>
-                        <a href="#" class="btn btn-primary">View Recipe</a>
+                        <h5 class="card-title">{{ recipe.title }}</h5>
+                        <p class="card-text">{{recipe.ingredients}}</p>
+                        <a href="{% url 'recipe_view' recipe.id  %}" class="btn btn-primary">View Recipe</a>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
+        {% endfor %}
     </section>
 
     <div class="text-center mb-5">
