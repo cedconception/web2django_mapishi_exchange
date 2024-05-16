@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add Recipe - {{recipe.title}}{% endblock %}
+
+{% block content %}
+
+<header class="container-fluid bg-success py-3">
+    <div class="container">
+        <h1 class="text-white display-4">Mapishi Exchange</h1>
+        <p class="text-white lead">Share your favorite recipes and discover new ones!</p>
+    </div>
+</header>
+{% include 'header.html' %}
+
+<div class="container p-4">
+    <h1>Delete Recipe: {{ recipe.title }}</h1>
+    <p>Are you sure you want to delete this recipe?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a href="{% url 'recipe_view' recipe.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

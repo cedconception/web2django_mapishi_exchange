@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Mapishi Recipe - { recipe.title }{% endblock %}
+{% block title %}Mapishi Recipe - {{recipe.title}}{% endblock %}
 
 {% block content %}
 
@@ -17,7 +17,7 @@
   <section class="mb-5">
     <div class="row">
       <div class="col-md-8">
-        <h2>{{recipe.title}}</h2> 
+        <h2>{{recipe.title}}</h2>
         {% if recipe.image%}
         <img src="{{recipe.image.url}}" class="card-img-top" alt="Recipe Image">
         {%else%}
@@ -27,8 +27,6 @@
         <p class="lead">by recipe author </p>
         <div class="mb-3">
           <span class="badge bg-primary">recipe category</span>
-          <span class="badge bg-warning">Prep Time: recipe.prep_time</span>
-          <span class="badge bg-success">Cook Time: recipe.cook_time</span>
         </div>
         <div class="mb-3">
           <h3>Ingredients</h3>
@@ -37,10 +35,32 @@
         <h3>Instructions</h3>
         <ol>
           <p>{{recipe.instructions}}</p>
-          
+
         </ol>
       </div>
+
+
+
       <div class="col-md-4">
+
+        <p>
+          <a href="{% url 'edit_recipe' recipe.id %}">
+            <button class="btn btn-warning">Edit Recipe</button>
+          </a>
+          <a href="{% url 'delete_recipe' recipe.id %}">
+            <button class="btn btn-danger">Delete Recipe</button>
+          </a>
+        </p>
+        {% if recipe.is_published %}
+        <p>Published: <em>{{ recipe.pub_date }}</em></p>
+        {% else %}
+        <form action="{% url 'publish_recipe' recipe.id %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Publish" class="btn btn-success">
+        </form>
+        {% endif %}
+
+
         <h3>Share this Recipe</h3>
         <div class="d-flex justify-content-between mb-3">
           <a href="#" class="btn btn-primary" onclick="window.print()">Print Recipe</a>

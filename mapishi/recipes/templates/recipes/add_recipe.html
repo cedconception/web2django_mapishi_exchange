@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add Recipe - {{recipe.title}}{% endblock %}
+
+{% block content %}
+
+<header class="container-fluid bg-success py-3">
+    <div class="container">
+        <h1 class="text-white display-4">Mapishi Exchange</h1>
+        <p class="text-white lead">Share your favorite recipes and discover new ones!</p>
+    </div>
+</header>
+{% include 'header.html' %}
+
+<div class="container p-4">
+    <h1>Add Recipe</h1>
+    <form method="post" enctype="multipart/form-data" class="form col-md-6">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Recipe</button>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -1,5 +1,3 @@
-
-
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Mapishi Recipes{% endblock %}
@@ -14,29 +12,30 @@
 </header>
 {% include 'header.html' %}
 
-<div class="container-fluid " style="background-image: url('../../static/img/9bc62940-e326-11ec-92b2-962b9dd69cc7_better_chinese_food.avif'); height: 300px; ">
+<div class="container-fluid "
+    style="background-image: url('../../static/img/9bc62940-e326-11ec-92b2-962b9dd69cc7_better_chinese_food.avif'); height: 300px; ">
     <div class="d-flex justify-content-center h-100">
-      <div class="text-center text-white align-self-center">
-        <h1 class="display-3 fw-bold">Share Your Recipes</h1>
-        <p class="lead mb-4">Join our community and discover new dishes from around the world.</p>
-        <a class="btn btn-primary btn-lg" href="#">Start Exchanging</a>
-      </div>
+        <div class="text-center text-white align-self-center">
+            <h1 class="display-3 fw-bold"> Share Your Recipes</h1>
+            <p class="lead mb-4">Join our community and discover new dishes from around the world.</p>
+            <a class="btn btn-primary btn-lg" href="{%url 'add_recipe'%}">Start Exchanging</a>
+        </div>
     </div>
-  </div>
+</div>
 
 <main class="container my-5">
 
     <h2 class="mb-3">Featured Recipes</h2>
-    <section class="mb-5 d-flex flex-wrap " >
+    <section class="mb-5 d-flex flex-wrap ">
         {% for recipe in recipes %}
         <div class="col-md-3 mb-3 p-2">
             <div class="col">
                 <div class="card mb-3">
-                {% if recipe.image%}
+                    {% if recipe.image%}
                     <img src="{{recipe.image.url}}" class="card-img-top" alt="Recipe Image">
-                {%else%}
-                    <img src="{% static 'img/Congo-Moambe-Chicken-13.jpg' %}" class="card-img-top" alt="Recipe Image">
-                {%endif%}
+                    {%else%}
+                    <img src="{% static 'img/recipe_thumb.jpg' %}" class="card-img-top" alt="Recipe Image">
+                    {%endif%}
 
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.title }}</h5>
@@ -50,7 +49,7 @@
     </section>
 
     <div class="text-center mb-5">
-        <a href="" class="btn btn-lg btn-success">Share Your Recipe</a>
+        <a href="{% url 'add_recipe' %}" class="btn btn-lg btn-success">Share Your Recipe</a>
     </div>
 
     <section class="mb-5">
