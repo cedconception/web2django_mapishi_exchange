@@ -8,7 +8,7 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = ['title', 'ingredients', 'instructions', 'image', 'pub_date', 'is_published']
 
-        # Optionally, you can customize the widgets if you want more control over the HTML
+        # customizing the widgets for more control over the HTML
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'ingredients': forms.Textarea(attrs={'class': 'form-control'}),

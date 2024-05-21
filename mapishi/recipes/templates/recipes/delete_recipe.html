@@ -18,7 +18,7 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Confirm Delete</button>
-        <a href="{% url 'recipe_view' recipe.id %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'recipes:recipe_view' recipe.id %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 

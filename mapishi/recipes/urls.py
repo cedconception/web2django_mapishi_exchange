@@ -3,7 +3,7 @@ from django.urls import path
 
 from recipes import views as recipes_views
 
-#app_name = 'recipes'
+app_name = 'recipes'
 
 urlpatterns = [
     # Home Page: Shows a list of recent articles

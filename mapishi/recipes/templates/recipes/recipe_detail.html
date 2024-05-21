@@ -7,6 +7,12 @@
 <header class="container-fluid bg-success py-3">
   <div class="container">
     <h1 class="text-white display-4">Mapishi Recipes</h1>
+    {% if user.is_authenticated %}
+    <h4 class=""> Hey {{ user.username }} </h4>
+    {%else%}
+    <h4 class=""> Hey Dear Guest, try to create an account so that you can also share your favorite
+      recipe </h4>
+    {%endif%}
     <p class="text-white lead">Explore delicious dishes!</p>
   </div>
 </header>
@@ -44,28 +50,36 @@
       <div class="col-md-4">
 
         <p>
-          <a href="{% url 'edit_recipe' recipe.id %}">
-            <button class="btn btn-warning">Edit Recipe</button>
+          {% if perms.recipes.edit_custom_recipe %}
+          <a href="{% url 'recipes:edit_recipe' recipe.id %}">
+            <button class="btn btn-warning mb-2">Edit Recipe</button>
           </a>
-          <a href="{% url 'delete_recipe' recipe.id %}">
+          {% endif %}
+
+          {% if perms.recipes.delete_custom_recipe %}
+          <a href="{% url 'recipes:delete_recipe' recipe.id %}">
             <button class="btn btn-danger">Delete Recipe</button>
           </a>
+          {% endif %}
         </p>
+
+        {% if perms.recipes.publish_recipe %}
         {% if recipe.is_published %}
         <p>Published: <em>{{ recipe.pub_date }}</em></p>
         {% else %}
-        <form action="{% url 'publish_recipe' recipe.id %}" method="post">
+        <form action="{% url 'recipes:publish_recipe' recipe.id %}" method="post">
           {% csrf_token %}
           <input type="submit" value="Publish" class="btn btn-success">
         </form>
         {% endif %}
+        {% endif %}
 
 
-        <h3>Share this Recipe</h3>
-        <div class="d-flex justify-content-between mb-3">
-          <a href="#" class="btn btn-primary" onclick="window.print()">Print Recipe</a>
-          <a href="#" class="btn btn-outline-primary">Save Recipe</a>
-        </div>
+
+
+
+
+
         <h3>Leave a Comment</h3>
         <form>
           <div class="mb-3">
@@ -74,7 +88,49 @@
           </div>
           <button type="submit" class="btn btn-primary">Submit Comment</button>
         </form>
+
+        <h3>Share this Recipe</h3>
+
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-12">
+              <ul class="list-unstyled d-flex justify-content-between">
+                <li class="mx-2">
+                  <a rel="nofollow noopener noreferrer" class="btn btn-primary"
+                    href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"
+                    title="Cliquez pour partager sur Facebook">
+                    <i class="fab fa-facebook-f"></i>Facebook
+                  </a>
+                </li>
+                <li class="mx-2">
+                  <a rel="nofollow noopener noreferrer" class="btn btn-info"
+                    href="https://twitter.com/intent/tweet?text=Check out this recipe!&url={{ request.build_absolute_uri }}"
+                    target="_blank" title="Cliquez pour partager sur Twitter">
+                    <i class="fab fa-twitter"></i> Twitter
+                  </a>
+                </li>
+                <li class="mx-2">
+                  <a rel="nofollow noopener noreferrer" class="btn btn-primary"
+                    href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title=Check out this recipe!&summary=Amazing recipe&source=LinkedIn"
+                    target="_blank" title="Cliquez pour partager sur LinkedIn">
+                    <i class="fab fa-linkedin-in"></i> Linkedin
+                  </a>
+                </li>
+
+                <li class="mx-2">
+                  <a rel="nofollow noopener noreferrer" class="btn btn-danger"
+                    href="mailto:?subject=Check out this recipe!&body=Check out this recipe: {{ request.build_absolute_uri }}"
+                    target="_blank" title="Cliquer pour envoyer un lien par e-mail à un ami">
+                    <i class="fas fa-envelope"></i> Mail
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
+
+
     </div>
   </section>
 

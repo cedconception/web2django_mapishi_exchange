@@ -10,27 +10,34 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{%url 'home'%}">Home</a>
+          <a class="nav-link active" aria-current="page" href="{%url 'recipes:home'%}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{%url 'home'%}">Browse Recipes</a>
+          <a class="nav-link" href="{%url 'recipes:home'%}">Browse Recipes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{%url 'about_mapishi'%}">Community</a>
+          <a class="nav-link" href="{%url 'recipes:about_mapishi'%}">Community</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="{%url 'home'%}" id="navbarDropdown" role="button"
+          <a class="nav-link dropdown-toggle" href="{%url 'recipes:home'%}" id="navbarDropdown" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             My Account
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if user.is_authenticated%}
+            <li><a class="dropdown-item" href="{%url 'accounts:profile'%}">Profile</a></li>
 
-            <li><a class="dropdown-item" href="">Profile</a></li>
-            <li><a class="dropdown-item" href="">Saved Recipes</a></li>
-            <li><a class="dropdown-item" href="">Logout</a></li>
+            <li>
+              <form action="{% url 'logout' %}" method="post" class="form-control">
+                {% csrf_token %}
+                <p><input type="submit" value="Logout" class="btn btn-danger"></p>
+              </form>
+            </li>
+            {%else%}
 
-            <li><a class="dropdown-item" href="">Login</a></li>
-            <li><a class="dropdown-item" href="">Register</a></li>
+            <li><a class="dropdown-item" href="{%url 'login'%}">Login First</a></li>
+
+            {%endif%}
 
           </ul>
         </li>

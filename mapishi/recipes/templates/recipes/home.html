@@ -7,6 +7,11 @@
 <header class="container-fluid bg-success py-3">
     <div class="container">
         <h1 class="text-white display-4">Mapishi Exchange</h1>
+        {% if user.is_authenticated %}
+        <h2> Hey {{ user.username }} </h2>
+        {%else%}
+        <h2> Hey Dear Guest, try to create an account so that you can </h2>
+        {%endif%}
         <p class="text-white lead">Share your favorite recipes and discover new ones!</p>
     </div>
 </header>
@@ -18,7 +23,9 @@
         <div class="text-center text-white align-self-center">
             <h1 class="display-3 fw-bold"> Share Your Recipes</h1>
             <p class="lead mb-4">Join our community and discover new dishes from around the world.</p>
-            <a class="btn btn-primary btn-lg" href="{%url 'add_recipe'%}">Start Exchanging</a>
+            {% if perms.recipes.add_custom_recipe %}
+            <a class="btn btn-primary btn-lg" href="{%url 'recipes:add_recipe'%}">Start Exchanging</a>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -28,7 +35,7 @@
     <h2 class="mb-3">Featured Recipes</h2>
     <section class="mb-5 d-flex flex-wrap ">
         {% for recipe in recipes %}
-        <div class="col-md-3 mb-3 p-2">
+        <div class="col-md-3 mb-3 p-2" style="height: 500px; overflow: hidden;">
             <div class="col">
                 <div class="card mb-3">
                     {% if recipe.image%}
@@ -39,8 +46,7 @@
 
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.title }}</h5>
-                        <p class="card-text">{{recipe.ingredients}}</p>
-                        <a href="{% url 'recipe_view' recipe.id  %}" class="btn btn-primary">View Recipe</a>
+                        <a href="{% url 'recipes:recipe_view' recipe.id  %}" class="btn btn-primary">View Recipe</a>
                     </div>
                 </div>
             </div>
@@ -49,7 +55,7 @@
     </section>
 
     <div class="text-center mb-5">
-        <a href="{% url 'add_recipe' %}" class="btn btn-lg btn-success">Share Your Recipe</a>
+        <a href="{% url 'recipes:add_recipe' %}" class="btn btn-lg btn-success">Share Your Recipe</a>
     </div>
 
     <section class="mb-5">
