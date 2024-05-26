@@ -13,10 +13,10 @@
 {% include 'header.html' %}
 
 <a href="{% url 'recipes:home' %}">Home</a>
-<form action="{% url 'recieps:recipes_add' %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
+<form action="{% url 'recieps:recipes_add' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
 </form>
 
 

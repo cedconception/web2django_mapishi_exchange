@@ -30,9 +30,9 @@
         <img src="{% static 'img/Congo-Moambe-Chicken-13.jpg' %}" class="card-img-top rounded" alt="Recipe Image">
         {%endif%}
 
-        <p class="lead">by recipe author </p>
+        <p class="lead">by : {{ recipe.author.first_name}} </p>
         <div class="mb-3">
-          <span class="badge bg-primary">recipe category</span>
+          <span class="badge bg-primary">{{recipe.category}}</span>
         </div>
         <div class="mb-3">
           <h3>Ingredients</h3>
@@ -41,7 +41,6 @@
         <h3>Instructions</h3>
         <ol>
           <p>{{recipe.instructions}}</p>
-
         </ol>
       </div>
 
@@ -79,15 +78,22 @@
 
 
 
-
+        <!-- Les commentaires -->
         <h3>Leave a Comment</h3>
-        <form>
-          <div class="mb-3">
-            <label for="comment" class="form-label">Your Comment</label>
-            <textarea class="form-control" id="comment" rows="3"></textarea>
-          </div>
+        <form method="post" action="{% url 'recipes:add_comment' recipe.id %}">
+          {% csrf_token %}
+          {{ form.as_p }}
           <button type="submit" class="btn btn-primary">Submit Comment</button>
         </form>
+
+        <h3>Comments</h3>
+        {% for comment in comments %}
+        <div class="comment mb-3">
+          <strong>{{ comment.user.username }}</strong>
+          <p style="color: green;">{{ comment.text }}</p>
+          <small>{{ comment.time }}</small>
+        </div>
+        {% endfor %}
 
         <h3>Share this Recipe</h3>
 
