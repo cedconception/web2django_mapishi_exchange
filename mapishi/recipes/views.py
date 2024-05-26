@@ -65,7 +65,11 @@ def edit_recipe(request, recipe_id):
         raise PermissionDenied()
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES, instance=recipe)
+        
         if form.is_valid():
+            if 'image' not in request.FILES:
+                # Ne pas remplacer l'image existante si aucune nouvelle image n'est téléchargée
+                form.cleaned_data['image'] = recipe.image
             form.save()
             return redirect('recipes:recipe_view', recipe_id=recipe.id)
     else:
@@ -112,6 +116,14 @@ def comment_add(request, recipe_id):
 def is_administrator(user):
     administrator = Group.objects.get(name='administrator')
     return user.groups.contains(administrator)
-    
+
+
+def search_results(request):
+    query = request.GET.get('q')
+    if query:
+        results = Recipe.objects.filter(title__icontains=query)
+    else:
+        results = Recipe.objects.none()
+    return render(request, 'recipes/search_results.html', {'recipes': results, 'query': query})
 
 

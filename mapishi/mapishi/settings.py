@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
-from mapishi.local_settings import *
+#   from mapishi.local_settings import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,12 +83,8 @@ WSGI_APPLICATION = 'mapishi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'db_mapishi',
-        'USER' : 'cedconception',
-        'PASSWORD': DATABASE_PASSWORD,
-        'HOST' : 'localhost',
-        'PORT' : '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

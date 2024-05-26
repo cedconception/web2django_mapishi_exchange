@@ -30,7 +30,10 @@ urlpatterns = [
     path('recipes/<int:recipe_id>/publish/', recipes_views.publish_recipe, name='publish_recipe'),
 
     #les commentaires
-    path('recipes/<int:recipe_id>/comment/add/', recipes_views.comment_add, name='add_comment')
+    path('recipes/<int:recipe_id>/comment/add/', recipes_views.comment_add, name='add_comment'),
+
+    #search
+    path('recipes/search/', recipes_views.search_results, name='search_results'),
 
     
 ]

@@ -35,9 +35,9 @@
     <h2 class="mb-3">Featured Recipes</h2>
     <section class="mb-5 d-flex flex-wrap ">
         {% for recipe in recipes %}
-        <div class="col-md-3 mb-3 p-2" style="height: 500px; overflow: hidden;">
+        <div class="col-md-3 mb-3 p-2" style="height: auto  ;overflow: hidden;">
             <div class="col">
-                <div class="card mb-3">
+                <div class="card mb-3 " style="width: 20rem;">
                     {% if recipe.image%}
                     <img src="{{recipe.image.url}}" class="card-img-top" alt="Recipe Image">
                     {%else%}
@@ -46,6 +46,8 @@
 
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.title }}</h5>
+                        <h6 class="card-body"> Published on {{ recipe.pub_date}}</h6>
+                        <p> by {{ recipe.author}} </p>
                         <a href="{% url 'recipes:recipe_view' recipe.id  %}" class="btn btn-primary">View Recipe</a>
                     </div>
                 </div>
@@ -71,5 +73,10 @@
 
 <footer class="container-fluid bg-dark text-white py-3">
     <p class="text-center">Copyright &copy; 2024 Mapishi Exchange</p>
+    <div class="text-center">
+        <p>Designed by <a href="https://www.instagram.com/cedconception/" class="">cedconception</a></p>
+        <p>purpose : web_programming 2 | Project</p>
+    </div>
 </footer>
+
 {%endblock%}

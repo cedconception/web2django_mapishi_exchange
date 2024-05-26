@@ -27,7 +27,8 @@
         {% if recipe.image%}
         <img src="{{recipe.image.url}}" class="card-img-top" alt="Recipe Image">
         {%else%}
-        <img src="{% static 'img/Congo-Moambe-Chicken-13.jpg' %}" class="card-img-top rounded" alt="Recipe Image">
+        <img src="{% static 'img/recipe_thumb.jpg' %}" class="card-img-top rounded">
+        alt="Recipe Image">
         {%endif%}
 
         <p class="lead">by : {{ recipe.author.first_name}} </p>
